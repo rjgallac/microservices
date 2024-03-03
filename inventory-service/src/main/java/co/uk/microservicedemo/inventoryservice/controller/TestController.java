@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/api/inventory")
 @Slf4j
 public class TestController {
     @GetMapping

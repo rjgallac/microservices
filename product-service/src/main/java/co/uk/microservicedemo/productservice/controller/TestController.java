@@ -13,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/api/product")
 public class TestController {
 
     private TestService testService;

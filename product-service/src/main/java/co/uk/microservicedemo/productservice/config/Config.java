@@ -1,6 +1,7 @@
 package co.uk.microservicedemo.productservice.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.annotation.EnableRetry;
@@ -13,6 +14,7 @@ import java.time.Duration;
 public class Config {
 
     @Bean
+    @LoadBalanced
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder){
         return restTemplateBuilder
                 .setConnectTimeout(Duration.ofMillis(500))

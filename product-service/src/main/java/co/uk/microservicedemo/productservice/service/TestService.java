@@ -20,7 +20,7 @@ public class TestService implements ITestService {
 
     RestTemplate restTemplate;
     public List<Product> get() {
-        ResponseEntity<List<Product>> exchange = restTemplate.exchange("http://localhost:8081/test", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+        ResponseEntity<List<Product>> exchange = restTemplate.exchange("http://inventory-service/api/inventory", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
         List<Product> products = exchange.getBody();
         assert products != null;
         log.info("SUCCESS");
@@ -32,7 +32,7 @@ public class TestService implements ITestService {
             Random random = new Random();
             int i = random.nextInt(5) +1;
             log.info("in test product service {}", i);
-            return restTemplate.getForEntity("http://localhost:8081/test/test" + i, String.class).getBody();
+            return restTemplate.getForEntity("http://inventory-service/api/inventory" + i, String.class).getBody();
         } catch (Exception exception) {
             System.out.println("HERE");
             throw exception;
