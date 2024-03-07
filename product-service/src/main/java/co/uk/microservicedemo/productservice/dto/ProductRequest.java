@@ -1,4 +1,4 @@
-package co.uk.microservicedemo.productservice.model;
+package co.uk.microservicedemo.productservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,12 +8,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document(value = "product")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Product {
-    @Id
+public class ProductRequest {
     private String id;
     private String name;
 }
