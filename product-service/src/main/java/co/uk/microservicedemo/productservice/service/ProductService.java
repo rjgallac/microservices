@@ -31,4 +31,8 @@ public class ProductService {
                 .name(product.getName())
                 .build();
     }
+
+    public void delete(String id) {
+        productRepository.deleteById(id);
+    }
 }
