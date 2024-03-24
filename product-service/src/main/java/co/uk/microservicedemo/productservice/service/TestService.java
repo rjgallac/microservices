@@ -23,14 +23,14 @@ public class TestService implements ITestService {
     private WebClient webClient;
 
     public List<Product> get() {
-//        ResponseEntity<List<Product>> exchange = restTemplate.exchange("http://inventory-service/api/inventory", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
-//        List<Product> products = exchange.getBody();
+        ResponseEntity<List<Product>> exchange = restTemplate.exchange("http://inventory-service/api/inventory", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+        List<Product> products = exchange.getBody();
 
-        List<Product> products = webClient.get()
-                .uri("http://inventory-service/api/inventory")
-                .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<Product>>() {
-                }).block();
+//        List<Product> products = webClient.get()
+//                .uri("http://inventory-service/api/inventory")
+//                .retrieve()
+//                .bodyToMono(new ParameterizedTypeReference<List<Product>>() {
+//                }).block();
         assert products != null;
         log.info("SUCCESS");
         return new ArrayList<>(products);
@@ -41,7 +41,13 @@ public class TestService implements ITestService {
             Random random = new Random();
             int i = random.nextInt(5) +1;
             log.info("in test product service {}", i);
-            return restTemplate.getForEntity("http://inventory-service/api/inventory" + i, String.class).getBody();
+//            String body = restTemplate.getForEntity("http://inventory-service/api/inventory" + i, String.class).getBody();
+            String body = webClient.get()
+                .uri("http://inventory-service/api/inventory" + i)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+            return body;
         } catch (Exception exception) {
             System.out.println("HERE");
             throw exception;

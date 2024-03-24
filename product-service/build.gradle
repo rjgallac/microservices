@@ -29,6 +29,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'org.springframework.kafka:spring-kafka'
 
 	implementation 'org.springframework.retry:spring-retry:2.0.3'
 	implementation 'org.springframework:spring-aspects:6.0.11'

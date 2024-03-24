@@ -4,18 +4,23 @@ import co.uk.microservicedemo.productservice.dto.ProductRequest;
 import co.uk.microservicedemo.productservice.dto.ProductResponse;
 import co.uk.microservicedemo.productservice.model.Product;
 import co.uk.microservicedemo.productservice.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    private final KafkaTemplate kafkaTemplate;
 
     public void add(ProductRequest productRequest){
+        kafkaTemplate.send("notifyTopic", productRequest.getName());
         Product product = Product.builder().name(productRequest.getName()).build();
         productRepository.save(product);
     }
